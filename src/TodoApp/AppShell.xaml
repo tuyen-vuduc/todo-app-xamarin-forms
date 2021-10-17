@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Shell
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:app="clr-namespace:TodoApp"
+    Title="TodoApp"
+    x:Class="TodoApp.AppShell">
+
+    <!--
+        The overall app visual hierarchy is defined here, along with navigation.
+    
+        https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/
+    -->
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style
+                x:Key="BaseStyle"
+                TargetType="Element">
+                <Setter
+                    Property="Shell.BackgroundColor"
+                    Value="{x:Static app:Colors.Bg}" />
+                <Setter
+                    Property="Shell.ForegroundColor"
+                    Value="{x:Static app:Colors.TextSecondary}" />
+                <Setter
+                    Property="Shell.TitleColor"
+                    Value="{x:Static app:Colors.TextSecondary}" />
+                <Setter
+                    Property="Shell.DisabledColor"
+                    Value="#B4FFFFFF" />
+                <Setter
+                    Property="Shell.UnselectedColor"
+                    Value="#95FFFFFF" />
+                <Setter
+                    Property="Shell.TabBarBackgroundColor"
+                    Value="{x:Static app:Colors.Primary}" />
+                <Setter
+                    Property="Shell.TabBarForegroundColor"
+                    Value="White" />
+                <Setter
+                    Property="Shell.TabBarUnselectedColor"
+                    Value="#95FFFFFF" />
+                <Setter
+                    Property="Shell.TabBarTitleColor"
+                    Value="White" />
+            </Style>
+            <Style
+                TargetType="TabBar"
+                BasedOn="{StaticResource BaseStyle}" />
+            <Style
+                TargetType="FlyoutItem"
+                BasedOn="{StaticResource BaseStyle}" />
+
+            <!--
+            Default Styles for all Flyout Items
+            https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/flyout#flyoutitem-and-menuitem-style-classes
+            -->
+            <Style
+                Class="FlyoutItemLabelStyle"
+                TargetType="Label">
+                <Setter
+                    Property="TextColor"
+                    Value="White" />
+            </Style>
+            <Style
+                Class="FlyoutItemLayoutStyle"
+                TargetType="Layout"
+                ApplyToDerivedTypes="True">
+                <Setter
+                    Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup
+                            x:Name="CommonStates">
+                            <VisualState
+                                x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter
+                                        Property="BackgroundColor"
+                                        Value="{x:OnPlatform UWP=Transparent, iOS=White}" />
+                                    <Setter
+                                        TargetName="FlyoutItemLabel"
+                                        Property="Label.TextColor"
+                                        Value="{x:Static app:Colors.Primary}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState
+                                x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter
+                                        Property="BackgroundColor"
+                                        Value="{x:Static app:Colors.Primary}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <!--
+            Custom Style you can apply to any Flyout Item
+            -->
+            <Style
+                Class="MenuItemLayoutStyle"
+                TargetType="Layout"
+                ApplyToDerivedTypes="True">
+                <Setter
+                    Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup
+                            x:Name="CommonStates">
+                            <VisualState
+                                x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter
+                                        TargetName="FlyoutItemLabel"
+                                        Property="Label.TextColor"
+                                        Value="{x:Static app:Colors.Primary}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Shell.Resources>
+    <TabBar>
+        <ShellContent
+            Route="Todos"
+            ContentTemplate="{DataTemplate app:TodosPage}" />
+    </TabBar>
+
+    <!--
+        TabBar lets you define content that won't show up in a flyout menu. When this content is active
+        the flyout menu won't be available. This is useful for creating areas of the application where 
+        you don't want users to be able to navigate away from. If you would like to navigate to this 
+        content you can do so by calling 
+        await Shell.Current.GoToAsync("//LoginPage");
+    -->
+    <TabBar>
+        <ShellContent
+            Route="Todos"
+            ContentTemplate="{DataTemplate app:TodosPage}" />
+    </TabBar>
+</Shell>

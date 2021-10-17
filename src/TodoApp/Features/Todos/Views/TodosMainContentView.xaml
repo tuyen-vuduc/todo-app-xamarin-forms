@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:app="clr-namespace:TodoApp"
+    x:Name="root"
+    BackgroundColor="Transparent"
+    x:DataType="app:TodosPageViewModel"
+    x:Class="TodoApp.TodosMainContentView">
+    <Frame
+        BackgroundColor="{x:Static app:Colors.Bg}"
+        HasShadow="False"
+        CornerRadius="36"
+        Padding="0">
+        <Grid
+            RowDefinitions="56,*,80"
+            ColumnDefinitions="*,80">
+            <Grid
+                ColumnSpacing="0"
+                Grid.ColumnSpan="2"
+                ColumnDefinitions="48,*,24,56">
+                <ContentView>
+                    <Image
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Source="{FontImage
+                            Color={x:Static app:Colors.TextPrimary},
+                            Size=24,
+                            FontFamily={x:Static app:Fonts.Mdi},
+                            Glyph={x:Static app:Mdi.Menu}
+                        }" />
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding ToggleSidebarCommand}" />
+                    </ContentView.GestureRecognizers>
+                </ContentView>
+                <ContentView
+                    Grid.Column="2">
+                    <Image
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Source="{FontImage
+                            Color={x:Static app:Colors.TextPrimary},
+                            Size=24,
+                            FontFamily={x:Static app:Fonts.Mdi},
+                            Glyph={x:Static app:Mdi.Magnify}
+                        }" />
+                </ContentView>
+                <ContentView
+                    Grid.Column="3">
+                    <Image
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Source="{FontImage
+                            Color={x:Static app:Colors.TextPrimary},
+                            Size=24,
+                            FontFamily={x:Static app:Fonts.Mdi},
+                            Glyph={x:Static app:Mdi.Bell}
+                        }" />
+                </ContentView>
+            </Grid>
+
+            <CollectionView
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Grid.RowSpan="2"
+                ItemsSource="{Binding Items}"
+                Header="{Binding .}">
+                <CollectionView.HeaderTemplate>
+                    <DataTemplate>
+                        <app:TodoSummaryControl />
+                    </DataTemplate>
+                </CollectionView.HeaderTemplate>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <app:TodoItemView
+                            ToggleDoneCommand="{Binding
+                                Source={RelativeSource AncestorType={x:Type ContentPage}},
+                                Path=BindingContext.ToggleDoneCommand}"
+                            DeleteCommand="{Binding 
+                                Source={RelativeSource AncestorType={x:Type ContentPage}},
+                                Path=BindingContext.DeleteCommand}" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <Grid>
+                        <Label
+                            Padding="{app:EdgeInsets Top={x:Static app:Dimens.SpacingXl}}"
+                            HorizontalOptions="Center"
+                            Text="Hooray! All good."
+                            Style="{x:Static app:Styles.TextSecondaryLg}" />
+                    </Grid>
+                </CollectionView.EmptyView>
+            </CollectionView>
+
+            <Grid
+                Grid.Column="1"
+                Grid.Row="2"
+                VerticalOptions="End"
+                HorizontalOptions="End"
+                Margin="{app:EdgeInsets
+                Bottom={x:Static app:Dimens.SpacingMd},
+                Right={x:Static app:Dimens.SpacingMd}}"
+                RowDefinitions="56"
+                ColumnDefinitions="56">
+                <Frame
+                    Style="{StaticResource FrameStyle}"
+                    BackgroundColor="{x:Static app:Colors.Accent1}"
+                    CornerRadius="28"
+                    Padding="{app:EdgeInsets
+                        All={x:Static app:Dimens.SpacingMd}}">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding CreateCommand}" />
+                    </Frame.GestureRecognizers>
+                    <Image
+                        Source="{FontImage
+                            Color=White,
+                            Size=24,
+                            FontFamily={x:Static app:Fonts.Mdi},
+                            Glyph={x:Static app:Mdi.Plus}
+                        }" />
+                </Frame>
+            </Grid>
+        </Grid>
+    </Frame>
+</ContentView>

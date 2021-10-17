@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:app="clr-namespace:TodoApp;assembly=TodoApp"
+    x:Class="TodoApp.TodoSummaryControl"
+    x:DataType="app:TodosPageViewModel">
+    <StackLayout
+        Spacing="0">
+        <Label
+            Padding="{app:EdgeInsets
+                Horizontal={x:Static app:Dimens.SpacingMd},
+                Vertical={x:Static app:Dimens.SpacingLg}}"
+            Style="{x:Static app:Styles.TextPageHeader}"
+            Text="{Binding CurrentUser.FirstName, StringFormat='{}What\'s up, {0}!'}" />
+        <Label
+            Padding="{app:EdgeInsets
+                Horizontal={x:Static app:Dimens.SpacingMd}}"
+            Style="{x:Static app:Styles.TextSecondaryMd}"
+            Text="Categories"
+            TextTransform="Uppercase" />
+        <ScrollView
+            HorizontalScrollBarVisibility="Never"
+            Orientation="Horizontal">
+            <StackLayout
+                Orientation="Horizontal"
+                Padding="{app:EdgeInsets
+                    All={x:Static app:Dimens.SpacingMd}}"
+                BindableLayout.ItemsSource="{Binding TaskStatistics}"
+                Spacing="{x:Static app:Dimens.SpacingMd}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate
+                        x:DataType="app:TaskStatisticModel">
+                        <Grid
+                            RowDefinitions="104"
+                            ColumnDefinitions="200">
+                            <Frame
+                                Style="{StaticResource FrameStyle}"
+                                Padding="{app:EdgeInsets All={x:Static app:Dimens.SpacingMd}}"
+                                BackgroundColor="White">
+                                <StackLayout>
+                                    <Label
+                                        Style="{x:Static app:Styles.TextSecondarySm}"
+                                        Text="{Binding TotalTaskCount, Converter={StaticResource TaskCountConverter}}" />
+                                    <Label
+                                        Style="{x:Static app:Styles.TextPrimaryLg}"
+                                        Text="{Binding Category}" />
+
+                                    <app:PercentageBar
+                                        VerticalOptions="EndAndExpand"
+                                        Color="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
+                                        Percentage="{Binding DonePercentage}" />
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+        </ScrollView>
+
+        <Label
+            Padding="{app:EdgeInsets
+                All={x:Static app:Dimens.SpacingMd}}"
+            TextColor="{x:Static app:Colors.TextSecondary}"
+            FontSize="{x:Static app:Dimens.FontSizeMd}"
+            Text="Today's Tasks"
+            TextTransform="Uppercase" />
+    </StackLayout>
+</ContentView>

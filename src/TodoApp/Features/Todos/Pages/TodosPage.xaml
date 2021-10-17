@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<app:BasePage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:app="clr-namespace:TodoApp"
+    x:Class="TodoApp.TodosPage"
+    x:DataType="app:TodosPageViewModel"
+    x:Name="root"
+    Title="Todos"
+    Shell.NavBarHasShadow="False"
+    Shell.NavBarIsVisible="False"
+    ios:Page.UseSafeArea="True"
+    BackgroundColor="{x:Static app:Colors.Bg}"
+    BindingContext="{app:BindingContext {x:Type app:TodosPageViewModel}}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            IconImageSource="{FontImage
+                Color={x:Static app:Colors.TextSecondary},
+                Size=24,
+                FontFamily={x:Static app:Fonts.Mdi},
+                Glyph={x:Static app:Mdi.Magnify}
+            }" />
+        <ToolbarItem
+            IconImageSource="{FontImage
+                Color={x:Static app:Colors.TextSecondary},
+                Size=24,
+                FontFamily={x:Static app:Fonts.Mdi},
+                Glyph={x:Static app:Mdi.Bell}
+            }" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Triggers>
+        <DataTrigger
+            Binding="{Binding SidebarMenuVisible}"
+            Value="True"
+            TargetType="ContentPage">
+            <Setter
+                Property="BackgroundColor"
+                Value="{x:Static app:Colors.Primary}" />
+        </DataTrigger>
+    </ContentPage.Triggers>
+
+    <Grid
+        x:Name="grid">
+        <app:SideBarMenuView />
+
+        <app:TodosMainContentView
+            BindingContext="{Binding BindingContext, Source={x:Reference root}}"
+            >
+            <app:TodosMainContentView.Triggers>
+                <DataTrigger
+                    Binding="{Binding SidebarMenuVisible}"
+                    Value="True"
+                    TargetType="app:TodosMainContentView">
+                    <Setter
+                        Property="BackgroundColor"
+                        Value="Transparent" />
+                    <Setter
+                        Property="Scale"
+                        Value="0.87" />
+                    <Setter
+                        Property="TranslationX">
+                        <Setter.Value>
+                            <MultiBinding
+                                Converter="{StaticResource MultiplyConverter}">
+                                <Binding
+                                    Path="Width"
+                                    Source="{x:Reference grid}" />
+                                <Binding
+                                    Path="."
+                                    Source="0.75" />
+                            </MultiBinding>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+                <DataTrigger
+                    Binding="{Binding SidebarMenuVisible}"
+                    Value="False"
+                    TargetType="app:TodosMainContentView">
+                    <Setter
+                        Property="BackgroundColor"
+                        Value="{x:Static app:Colors.Bg}" />
+                    <Setter
+                        Property="Scale"
+                        Value="1" />
+                    <Setter
+                        Property="TranslationX"
+                        Value="0" />
+                </DataTrigger>
+            </app:TodosMainContentView.Triggers>
+        </app:TodosMainContentView>
+    </Grid>
+</app:BasePage>

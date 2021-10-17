@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:app="clr-namespace:TodoApp;assembly=TodoApp"
+    x:Class="TodoApp.App">
+    <!--
+        Define global resources and styles here, that apply to all pages in your app.
+    -->
+    <Application.Resources>
+        <ResourceDictionary>
+            <Style
+                TargetType="Button">
+                <Setter
+                    Property="TextColor"
+                    Value="White" />
+                <Setter
+                    Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup
+                            x:Name="CommonStates">
+                            <VisualState
+                                x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter
+                                        Property="BackgroundColor"
+                                        Value="{x:Static app:Colors.Primary}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState
+                                x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter
+                                        Property="BackgroundColor"
+                                        Value="#332196F3" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+            <app:DueDateConverter
+                x:Key="DueDateConverter" />
+            <app:MultiplyConverter
+                x:Key="MultiplyConverter" />
+            <app:CategoryColorConverter
+                x:Key="CategoryColorConverter" />
+            <app:TaskCountConverter
+                x:Key="TaskCountConverter" />
+            <app:MenuIconConverter
+                x:Key="MenuIconConverter" />
+            <xct:InvertedBoolConverter
+                x:Key="InvertedBoolConverter" />
+
+            <Style
+                x:Key="ShadowStyle"
+                TargetType="View">
+                <Setter
+                    Property="xct:ShadowEffect.Color"
+                    Value="{x:Static app:Colors.TextPrimary}" />
+                <Setter
+                    Property="xct:ShadowEffect.OffsetY"
+                    Value="2" />
+                <Setter
+                    Property="xct:ShadowEffect.Radius"
+                    Value="4" />
+                <Setter
+                    Property="xct:ShadowEffect.Opacity"
+                    Value="0.1" />
+            </Style>
+            <Style
+                x:Key="FrameStyle"
+                BasedOn="{x:StaticResource ShadowStyle}"
+                TargetType="Frame">
+                <Setter
+                    Property="HasShadow"
+                    Value="False" />
+                <Setter
+                    Property="Padding"
+                    Value="0" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

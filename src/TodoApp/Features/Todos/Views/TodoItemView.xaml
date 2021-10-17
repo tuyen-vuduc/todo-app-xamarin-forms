@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:app="clr-namespace:TodoApp"
+    x:Name="root"
+    x:Class="TodoApp.TodoItemView">
+    <SwipeView>
+        <Grid
+            Padding="{app:EdgeInsets
+                Horizontal={x:Static app:Dimens.SpacingMd},
+                Vertical={x:Static app:Dimens.SpacingSm}
+            }"
+            x:DataType="app:TodoModel">
+            <Frame
+                Style="{StaticResource FrameStyle}"
+                Padding="{app:EdgeInsets
+                    All={x:Static app:Dimens.SpacingMd}}">
+                <StackLayout
+                    Spacing="{x:Static app:Dimens.SpacingMd}"
+                    Orientation="Horizontal">
+                    <Grid
+                        ColumnDefinitions="24">
+                        <Image
+                            IsVisible="{Binding IsDone, Converter={StaticResource InvertedBoolConverter}}"
+                            Source="{FontImage
+                                Glyph={x:Static app:Mdi.CheckboxBlankCircleOutline},
+                                Size={x:Static app:Dimens.SpacingLg},
+                                Color={x:Static app:Colors.Accent2},
+                                FontFamily={x:Static app:Fonts.Mdi}
+                            }">
+                            <Image.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding Category}"
+                                    Value="Business"
+                                    TargetType="Image">
+                                    <Setter
+                                        Property="Source"
+                                        Value="{FontImage
+                                            Glyph={x:Static app:Mdi.CheckboxBlankCircleOutline},
+                                            Size={x:Static app:Dimens.SpacingLg},
+                                            Color={x:Static app:Colors.Accent},
+                                            FontFamily={x:Static app:Fonts.Mdi}
+                                        }" />
+                                </DataTrigger>
+                            </Image.Triggers>
+                        </Image>
+                        <Image
+                            Opacity="0.7"
+                            IsVisible="{Binding IsDone}"
+                            Source="{FontImage
+                                Glyph={x:Static app:Mdi.CheckboxMarkedCircle},
+                                Size={x:Static app:Dimens.SpacingLg},
+                                Color={x:Static app:Colors.Disabled},
+                                FontFamily={x:Static app:Fonts.Mdi}
+                            }">
+                            <Image.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding IsDone}"
+                                    Value="True"
+                                    TargetType="Image">
+                                    <Setter
+                                        Property="Source"
+                                        Value="{FontImage
+                                            Glyph={x:Static app:Mdi.CheckboxMarkedCircle},
+                                            Size={x:Static app:Dimens.SpacingLg},
+                                            Color={x:Static app:Colors.Secondary},
+                                            FontFamily={x:Static app:Fonts.Mdi}
+                                        }" />
+                                </DataTrigger>
+                            </Image.Triggers>
+                        </Image>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding
+                                    Source={x:Reference root},
+                                    Path=ToggleDoneCommand}"
+                                CommandParameter="{Binding .}" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                    <Label
+                        IsVisible="{Binding IsDone, Converter={StaticResource InvertedBoolConverter}}"
+                        VerticalTextAlignment="Center"
+                        Style="{x:Static app:Styles.TextPrimaryMd}"
+                        Text="{Binding Title}"
+                        TextDecorations="None"/>
+                    <Label
+                        VerticalTextAlignment="Center"
+                        IsVisible="{Binding IsDone}"
+                        Style="{x:Static app:Styles.TextPrimaryMd}"
+                        Text="{Binding Title}"
+                        TextDecorations="Strikethrough"/>
+                </StackLayout>
+            </Frame>
+        </Grid>
+        <SwipeView.RightItems>
+            <SwipeItem
+                Text="Delete"
+                IconImageSource="{FontImage
+                    Glyph={x:Static app:Mdi.TrashCanOutline},
+                    Color={x:Static app:Colors.Accent},
+                    FontFamily={x:Static app:Fonts.Mdi},
+                    Size={x:Static app:Dimens.FontSizeLg}
+                }"
+                BackgroundColor="{x:Static app:Colors.Accent}"
+                Command="{Binding
+                    Source={x:Reference root},
+                    Path=DeleteCommand}"
+                CommandParameter="{Binding 
+                    Source={x:Reference root},
+                    Path=BindingContext}" />
+        </SwipeView.RightItems>
+    </SwipeView>
+</ContentView>

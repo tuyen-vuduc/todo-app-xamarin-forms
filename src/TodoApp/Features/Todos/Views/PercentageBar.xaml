@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:app="clr-namespace:TodoApp;assembly=TodoApp"
+    x:Class="TodoApp.PercentageBar"
+    x:Name="root">
+    <Grid
+        x:Name="barBackground"
+        VerticalOptions="EndAndExpand"
+        RowDefinitions="6">
+        <Frame
+            Padding="0"
+            CornerRadius="3"
+            Opacity="0.05"
+            HasShadow="False"
+            BackgroundColor="{Binding
+                Source={x:Reference root},
+                Path=Color,
+                FallbackValue={x:Static app:Colors.Accent}}" />
+        <Grid
+            HorizontalOptions="StartAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition>
+                    <ColumnDefinition.Width>
+                        <MultiBinding
+                            Converter="{StaticResource MultiplyConverter}">
+                            <Binding
+                                Path="Width"
+                                Source="{x:Reference barBackground}" />
+                            <Binding
+                                Path="Percentage"
+                                Source="{x:Reference root}" />
+                        </MultiBinding>
+                    </ColumnDefinition.Width>
+                </ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Frame
+                HasShadow="False"
+                Padding="0"
+                CornerRadius="3"
+                BackgroundColor="{Binding 
+                    Source={x:Reference root},
+                    Path=Color,
+                    FallbackValue={x:Static app:Colors.Accent}}" />
+        </Grid>
+    </Grid>
+</ContentView>

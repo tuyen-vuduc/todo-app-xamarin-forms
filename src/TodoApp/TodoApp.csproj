@@ -1,0 +1,83 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2125" />  
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
+    <PackageReference Include="DryIoc.dll" Version="5.0.0-preview-01" />
+    <PackageReference Include="PropertyChanged.Fody" Version="3.4.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.10" />
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="1.3.0-pre2" />
+    <PackageReference Include="Acr.UserDialogs" Version="7.2.0.534" />
+    <PackageReference Include="Microcharts.Forms" Version="1.0.0-preview1" />
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="2.88.0-preview.145" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Core\" />
+    <None Remove="Features\" />
+    <None Remove="UI\" />
+    <None Remove="Features\Todos\" />
+    <None Remove="UI\MarkupExtensions\" />
+    <None Remove="Features\Default\" />
+    <None Remove="Features\Default\Models\" />
+    <None Remove="Features\Default\Services\" />
+    <None Remove="Features\Default\ViewModels\" />
+    <None Remove="Features\Default\Views\" />
+    <None Remove="Features\Todos\Models\" />
+    <None Remove="Features\Todos\Views\" />
+    <None Remove="Features\Todos\Controls\" />
+    <None Remove="DryIoc.dll" />
+    <None Remove="Core\Mvvm\" />
+    <None Remove="PropertyChanged.Fody" />
+    <None Remove="Core\Dal\" />
+    <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
+    <None Remove="Core\Dal\Entities\" />
+    <None Remove="Features\Todos\Services\" />
+    <None Remove="UI\Fonts\" />
+    <None Remove="Xamarin.CommunityToolkit" />
+    <None Remove="Core\Dal\TodoRepository\" />
+    <None Remove="UI\Fonts\materialdesignicons-webfont.ttf" />
+    <None Remove="Features\Todos\Converters\" />
+    <None Remove="Microcharts.Forms" />
+    <None Remove="SkiaSharp.Views.Forms" />
+    <None Remove="Core\Navigation\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Core\" />
+    <Folder Include="Features\" />
+    <Folder Include="UI\" />
+    <Folder Include="Features\Todos\" />
+    <Folder Include="UI\MarkupExtensions\" />
+    <Folder Include="Features\Default\" />
+    <Folder Include="Features\Default\Models\" />
+    <Folder Include="Features\Default\Services\" />
+    <Folder Include="Features\Default\ViewModels\" />
+    <Folder Include="Features\Default\Views\" />
+    <Folder Include="Features\Todos\Models\" />
+    <Folder Include="Features\Todos\Views\" />
+    <Folder Include="Core\Mvvm\" />
+    <Folder Include="Core\Dal\" />
+    <Folder Include="Core\Dal\Entities\" />
+    <Folder Include="Features\Todos\Services\" />
+    <Folder Include="UI\Fonts\" />
+    <Folder Include="Core\Dal\Repositories\" />
+    <Folder Include="Features\Todos\Converters\" />
+    <Folder Include="Core\Navigation\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UI\Fonts\materialdesignicons-webfont.ttf" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties>
+        <Policies>
+          <DotNetNamingPolicy DirectoryNamespaceAssociation="None" ResourceNamePolicy="FileFormatDefault" />
+        </Policies>
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
+</Project>

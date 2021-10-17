@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<app:BasePage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:app="clr-namespace:TodoApp"
+    x:Class="TodoApp.NewTodoPage"
+    x:DataType="app:NewTodoPageViewModel"
+    ios:Page.UseSafeArea="True"
+    Shell.PresentationMode="ModalAnimated"
+    Title="New Todo"
+    BackgroundColor="{x:Static app:Colors.Bg}"
+    BindingContext="{app:BindingContext {x:Type app:NewTodoPageViewModel}}">
+    <Grid
+        RowDefinitions="80,*"
+        ColumnDefinitions="*,80">
+        <Grid
+            Grid.Column="1"
+            Grid.Row="0"
+            VerticalOptions="End"
+            HorizontalOptions="End"
+            Margin="{app:EdgeInsets
+                Bottom={x:Static app:Dimens.SpacingMd},
+                Right={x:Static app:Dimens.SpacingMd}}"
+            RowDefinitions="56"
+            ColumnDefinitions="56">
+            <Frame
+                Style="{StaticResource FrameStyle}"
+                BackgroundColor="{x:Static app:Colors.Bg}"
+                BorderColor="{x:Static app:Colors.Divider}"
+                CornerRadius="28"
+                Padding="{app:EdgeInsets
+                    All={x:Static app:Dimens.SpacingMd}}">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding CloseCommand}" />
+                </Frame.GestureRecognizers>
+                <Image
+                    Source="{FontImage
+                        Color={x:Static app:Colors.TextPrimary},
+                        Size=24,
+                        FontFamily={x:Static app:Fonts.Mdi},
+                        Glyph={x:Static app:Mdi.Close}
+                }" />
+            </Frame>
+        </Grid>
+
+        <StackLayout
+            Grid.ColumnSpan="2"
+            Margin="{app:EdgeInsets 
+                Top={x:Static app:Dimens.SpacingXl}}"
+            Padding="{app:EdgeInsets 
+                Top={x:Static app:Dimens.SpacingXl},
+                All={x:Static app:Dimens.SpacingMd}}"
+            Spacing="{x:Static app:Dimens.SpacingXl}"
+            Grid.Row="1">
+            <Grid
+                RowDefinitions="24">
+                <Frame
+                    Style="{StaticResource FrameStyle}"
+                    HorizontalOptions="Start"
+                    BackgroundColor="{x:Static app:Colors.Accent1}"
+                    Padding="{app:EdgeInsets
+                        Horizontal={x:Static app:Dimens.SpacingMd}}"
+                    CornerRadius="12">
+                    <Label
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Text="{Binding Category}"
+                        TextColor="White"
+                        FontSize="{x:Static app:Dimens.FontSizeSm}" />
+                </Frame>
+            </Grid>
+
+            <Entry
+                Text="{Binding Title}"
+                app:EntryEffect.HasBorder="False"
+                FontSize="{x:Static app:Dimens.FontSizeXl}"
+                TextColor="{x:Static app:Colors.TextPrimary}"
+                PlaceholderColor="{x:Static app:Colors.TextSecondary}"
+                Placeholder="Yay?" />
+
+            <Grid
+                RowDefinitions="56">
+                <Picker
+                    x:Name="CategoryPicker"
+                    VerticalOptions="Start"
+                    HorizontalOptions="Start"
+                    HeightRequest="1"
+                    WidthRequest="1"
+                    Opacity="0"
+                    SelectedItem="{Binding Category}"
+                    ItemsSource="{Binding Categories}" />
+                <DatePicker
+                    MinimumDate="{x:Static x:DateTime.Today}"
+                    VerticalOptions="Start"
+                    HorizontalOptions="Start"
+                    HeightRequest="1"
+                    WidthRequest="1"
+                    Opacity="0"
+                    Date="{Binding DueDate}"
+                    x:Name="DueDatePicker" />
+                <StackLayout
+                    Spacing="{x:Static app:Dimens.SpacingXl}"
+                    Orientation="Horizontal">
+                    <Frame
+                        Style="{StaticResource FrameStyle}"
+                        CornerRadius="28"
+                        Padding="{app:EdgeInsets 
+                            Horizontal={x:Static app:Dimens.SpacingLg}, 
+                            Vertical={x:Static app:Dimens.SpacingMd}}"
+                        BorderColor="{x:Static app:Colors.Divider}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Tapped="OnPickDueDateButtonTapped" />
+                        </Frame.GestureRecognizers>
+                        <Label
+                            VerticalOptions="Center"
+                            FontSize="{x:Static app:Dimens.FontSizeLg}"
+                            TextColor="{x:Static app:Colors.TextSecondary}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span
+                                        Text="{x:Static app:Mdi.Calendar}"
+                                        FontFamily="{x:Static app:Fonts.Mdi}" />
+                                    <Span
+                                        Text="   " />
+                                    <Span
+                                        Text="{Binding DueDate, Converter={StaticResource DueDateConverter}}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Frame>
+                    <Grid
+                        HorizontalOptions="EndAndExpand"
+                        RowDefinitions="56"
+                        ColumnDefinitions="56">
+                        <Frame
+                            Style="{StaticResource FrameStyle}"
+                            CornerRadius="28"
+                            BorderColor="{x:Static app:Colors.Divider}"
+                            Padding="{app:EdgeInsets All={x:Static app:Dimens.SpacingMd}}">
+                            <Image
+                                Source="{FontImage
+                                Color={x:Static app:Colors.Accent1},
+                                Size=24,
+                                FontFamily={x:Static app:Fonts.Mdi},
+                                Glyph={x:Static app:Mdi.RecordCircleOutline}
+                            }" />
+                        </Frame>
+                    </Grid>
+                </StackLayout>
+            </Grid>
+
+            <StackLayout
+                Margin="{app:EdgeInsets 
+                    Vertical={x:Static app:Dimens.SpacingXl}}"
+                Spacing="{x:Static app:Dimens.SpacingXl}"
+                Orientation="Horizontal"
+                HorizontalOptions="Center">
+                <ContentView
+                    Padding="{app:EdgeInsets All={x:Static app:Dimens.SpacingMd}}">
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="OnSelectCategoryButtonTapped" />
+                    </ContentView.GestureRecognizers>
+                    <Image
+                        Source="{FontImage
+                        Color={x:Static app:Colors.TextSecondary},
+                        Size=24,
+                        FontFamily={x:Static app:Fonts.Mdi},
+                        Glyph={x:Static app:Mdi.FolderPlus}
+                    }" />
+                </ContentView>
+                <ContentView
+                    Padding="{app:EdgeInsets All={x:Static app:Dimens.SpacingMd}}">
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding ToggleFlaggedCommand}" />
+                    </ContentView.GestureRecognizers>
+                    <Image
+                        Source="{FontImage
+                            Color={x:Static app:Colors.TextSecondary},
+                            Size=24,
+                            FontFamily={x:Static app:Fonts.Mdi},
+                            Glyph={x:Static app:Mdi.Flag}
+                        }">
+                        <Image.Triggers>
+                            <DataTrigger
+                                TargetType="Image"
+                                Binding="{Binding IsFlagged}"
+                                Value="True">
+                                <Setter
+                                    Property="Source"
+                                    Value="{FontImage
+                                    Color={x:Static app:Colors.Accent1},
+                                    Size=24,
+                                    FontFamily={x:Static app:Fonts.Mdi},
+                                    Glyph={x:Static app:Mdi.Flag}
+                                }" />
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
+                </ContentView>
+                <ContentView
+                    Padding="{app:EdgeInsets All={x:Static app:Dimens.SpacingMd}}">
+                    <Image
+                        Source="{FontImage
+                        Color={x:Static app:Colors.TextSecondary},
+                        Size=24,
+                        FontFamily={x:Static app:Fonts.Mdi},
+                        Glyph={x:Static app:Mdi.WeatherNight}
+                    }" />
+                </ContentView>
+            </StackLayout>
+            <Grid
+                Margin="{app:EdgeInsets 
+                    Vertical={x:Static app:Dimens.SpacingXl}}"
+                RowDefinitions="56">
+                <Frame
+                    Style="{StaticResource FrameStyle}"
+                    HorizontalOptions="End"
+                    CornerRadius="28"
+                    Padding="{app:EdgeInsets 
+                            Horizontal={x:Static app:Dimens.SpacingXl}, 
+                            Vertical={x:Static app:Dimens.SpacingMd}}"
+                    BackgroundColor="{x:Static app:Colors.Accent1}">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding SaveCommand}" />
+                    </Frame.GestureRecognizers>
+                    <Label
+                        VerticalOptions="Center"
+                        FontSize="{x:Static app:Dimens.FontSizeLg}"
+                        TextColor="White">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span
+                                    Text="New task" />
+                                <Span
+                                    Text="   " />
+                                <Span
+                                    Text="{x:Static app:Mdi.ChevronUp}"
+                                    FontFamily="{x:Static app:Fonts.Mdi}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Frame>
+            </Grid>
+        </StackLayout>
+    </Grid>
+</app:BasePage>

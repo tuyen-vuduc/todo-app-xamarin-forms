@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:app="clr-namespace:TodoApp"
+    xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+    x:Class="TodoApp.SideBarMenuView"
+    x:Name="root"
+    x:DataType="app:TodosPageViewModel"
+    BackgroundColor="{x:Static app:Colors.Primary}">
+    <ContentView.Resources>
+        <app:ChartConverter
+            x:Key="ChartConverter" />
+    </ContentView.Resources>
+    <Grid
+        RowSpacing="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition>
+                <ColumnDefinition.Width>
+                    <MultiBinding
+                        Converter="{StaticResource MultiplyConverter}">
+                        <Binding
+                            Path="Width"
+                            Source="{x:Reference root}" />
+                        <Binding
+                            Path="."
+                            Source="0.7" />
+                    </MultiBinding>
+                </ColumnDefinition.Width>
+            </ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition>
+                <RowDefinition.Height>
+                    <MultiBinding
+                        Converter="{StaticResource MultiplyConverter}">
+                        <Binding
+                            Path="Height"
+                            Source="{x:Reference root}" />
+                        <Binding
+                            Path="."
+                            Source="0.065" />
+                    </MultiBinding>
+                </RowDefinition.Height>
+            </RowDefinition>
+            <RowDefinition
+                Height="*" />
+        </Grid.RowDefinitions>
+        <Grid
+            Grid.Row="1"
+            ColumnSpacing="0"
+            RowSpacing="0"
+            RowDefinitions="80,*"
+            ColumnDefinitions="*,80">
+
+            <StackLayout
+                Grid.RowSpan="2"
+                Grid.ColumnSpan="2"
+                Padding="{app:EdgeInsets
+                    All={x:Static app:Dimens.SpacingXl}
+                }"
+                Spacing="0">
+                <Grid
+                    RowDefinitions="96"
+                    ColumnDefinitions="96">
+                    <Frame
+                        HasShadow="False"
+                        CornerRadius="48"
+                        BorderColor="{x:Static app:Colors.Divider}"
+                        BackgroundColor="Transparent"
+                        Padding="{app:EdgeInsets All={x:Static app:Dimens.SpacingSm}}">
+                        <Frame
+                            HasShadow="False"
+                            BackgroundColor="White"
+                            Padding="0"
+                            CornerRadius="40">
+                            <Image
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"
+                                WidthRequest="48"
+                                Source="{FontImage
+                                    Glyph={Static app:Mdi.AccountOutline},
+                                    Size=48,
+                                    Color={x:Static app:Colors.Accent1},
+                                    FontFamily={x:Static app:Fonts.Mdi}
+                                }" />
+                        </Frame>
+                    </Frame>
+                </Grid>
+
+                <Label
+                    Padding="{app:EdgeInsets
+                            Top={x:Static app:Dimens.SpacingXl}
+                        }"
+                    Text="{Binding CurrentUser.FirstName}"
+                    Style="{x:Static app:Styles.TextSidebarPersonName}" />
+
+                <Label
+                    Padding="{app:EdgeInsets
+                            Bottom={x:Static app:Dimens.SpacingXl}
+                        }"
+                    Text="{Binding CurrentUser.LastName}"
+                    Style="{x:Static app:Styles.TextSidebarPersonName}"/>
+
+                <StackLayout
+                    Spacing="0"
+                    BindableLayout.ItemsSource="{Binding MenuItems}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="app:MenuItemModel">
+                            <app:SidebarItemView
+                                Margin="{app:EdgeInsets Vertical={x:Static app:Dimens.FontSizeSm}}"
+                                IconSource="{Binding Icon, Converter={StaticResource MenuIconConverter}}"
+                                Text="{Binding Text}" />
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+
+                <microcharts:ChartView
+                    VerticalOptions="EndAndExpand"
+                    HeightRequest="72"
+                    Chart="{Binding TaskCountByDays, Converter={StaticResource ChartConverter}}" />
+
+                <Label
+                    Text="Good"
+                    Style="{x:Static app:Styles.TextSecondarySm}" />
+
+                <Label
+                    Padding="{app:EdgeInsets
+                            Bottom={x:Static app:Dimens.SpacingXl}
+                        }"
+                    Text="Consitency"
+                    Style="{x:Static app:Styles.TextSidebarFooter}" />
+            </StackLayout>
+
+            <Grid
+                Grid.Column="1"
+                Grid.Row="0"
+                VerticalOptions="End"
+                HorizontalOptions="End"
+                Margin="{app:EdgeInsets
+                    Bottom={x:Static app:Dimens.SpacingMd},
+                    Right={x:Static app:Dimens.SpacingMd}}"
+                RowDefinitions="56"
+                ColumnDefinitions="56">
+                <Frame
+                    HasShadow="False"
+                    BackgroundColor="Transparent"
+                    BorderColor="{x:Static app:Colors.Divider}"
+                    CornerRadius="28"
+                    Padding="{app:EdgeInsets
+                        All={x:Static app:Dimens.SpacingSm}}">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding ToggleSidebarCommand}" />
+                    </Frame.GestureRecognizers>
+                    <Image
+                        Source="{FontImage
+                        Color=White,
+                        Size=48,
+                        FontFamily={x:Static app:Fonts.Mdi},
+                        Glyph={x:Static app:Mdi.ChevronLeft}
+                }" />
+                </Frame>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentView>

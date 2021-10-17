@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:app="clr-namespace:TodoApp;assembly=TodoApp"
+    x:Name="root"
+    x:Class="TodoApp.SidebarItemView">
+    <StackLayout
+        Spacing="{x:Static app:Dimens.FontSizeMd}"
+        Orientation="Horizontal">
+        <Image
+            VerticalOptions="Center"
+            Source="{Binding IconSource, Source={x:Reference root}}" />
+        <Label
+            VerticalOptions="Center"
+            Text="{Binding Text, Source={x:Reference root}}"
+            Style="{x:Static app:Styles.TextSidebarMenuItem}" />
+    </StackLayout>
+</ContentView>
