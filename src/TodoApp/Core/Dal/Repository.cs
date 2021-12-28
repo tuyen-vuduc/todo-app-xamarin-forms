@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace TodoApp
 {
-    public abstract class Repository<T> : IRepository<T> where T : Entity
+    public class Repository<T> : IRepository<T> where T : Entity
     {
         protected readonly TodosDbContext dbContext;
 
@@ -37,7 +39,12 @@ namespace TodoApp
             return entity;
         }
 
-        public abstract Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> filter);
+        public Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> filter)
+        {
+            var query = dbContext.Set<T>().Where(filter);
+            return query.ToListAsync()
+                .ContinueWith(t => (IEnumerable<T>)t.Result);
+        }
 
         public async Task<Guid> InsertAsync(T entity)
         {

@@ -38,7 +38,7 @@ namespace TodoApp
         void RegisterTypes(IContainer container)
         {
             container.Register<IAppNavigator, AppNavigator>(Reuse.Singleton);
-            container.Register<IRepository<TodoEntity>, TodoRepository>(Reuse.Singleton);
+            container.Register(typeof(IRepository<>), typeof(Repository<>), Reuse.Singleton);
             container.RegisterInstance<TodosDbContext>(new TodosDbContext());
             container.RegisterInstance<IUserDialogs>(UserDialogs.Instance);
         }
