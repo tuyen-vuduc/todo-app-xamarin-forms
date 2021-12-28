@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <GenerateErrorForMissingTargetingPacks>false</GenerateErrorForMissingTargetingPacks>
 
     <Nullable>enable</Nullable>
@@ -32,7 +32,6 @@
   <ItemGroup>
     <None Remove="Features\" />
     <None Remove="Features\Todos\" />
-    <None Remove="Features\Todos\Services\" />
     <None Remove="UnitTests\" />
     <None Remove="Bogus" />
     <None Remove="SkiaSharp.Views.Forms" />
@@ -41,8 +40,6 @@
   <ItemGroup>
     <Folder Include="Features\" />
     <Folder Include="Features\Todos\" />
-    <Folder Include="Features\Todos\Services" />
-    <Folder Include="Features\Todos\Services\" />
     <Folder Include="Core\Navigation\" />
   </ItemGroup>
 </Project>

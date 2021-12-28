@@ -16,15 +16,15 @@ namespace TodoApp
         {
             if (string.IsNullOrWhiteSpace(target)) return target;
 
-            var normalizedTarget = (!target.StartsWith("http://") && !target.StartsWith("https://"))
-                ? Path.Join("https://app-navigator", target)
-                : target;
+            var normalizedTarget = target.StartsWith("http://") || target.StartsWith("https://")
+                ? target
+                : "https://app-navigator/" + target;
 
             var uriBuilder = new UriBuilder(normalizedTarget);
 
             if (args != null)
             {
-                var argsInJson = System.Text.Json.JsonSerializer.Serialize(args);
+                var argsInJson = JsonSerializer.Serialize(args);
                 var argsQueryParameter =
                     $"{DataQueryParameterName}=" + Uri.EscapeUriString(argsInJson);
                 uriBuilder.Query = string.IsNullOrWhiteSpace(uriBuilder.Query)
