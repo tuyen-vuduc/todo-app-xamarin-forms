@@ -14,7 +14,7 @@ namespace TodoApp.Tests.Core.Dal
         {
             var dbContext = GetDbContext();
 
-            var sut = new TodoRepository(dbContext);
+            var sut = new Repository<TodoEntity>(dbContext);
             var faker = new Faker<TodoEntity>();
             faker.RuleFor(x => x.Id, f => Guid.NewGuid());
             faker.RuleFor(x => x.Category, f => f.Commerce.Categories(10)[0]);
@@ -36,7 +36,7 @@ namespace TodoApp.Tests.Core.Dal
         {
             var dbContext = GetDbContext();
 
-            var sut = new TodoRepository(dbContext);
+            var sut = new Repository<TodoEntity>(dbContext);
             var faker = new Faker<TodoEntity>();
             faker.RuleFor(x => x.Id, f => Guid.NewGuid());
             faker.RuleFor(x => x.Category, f => f.Commerce.Categories(10)[0]);
