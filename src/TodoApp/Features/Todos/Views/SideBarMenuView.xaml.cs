@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using Xamarin.Forms;
 
 namespace TodoApp
 {
@@ -9,6 +7,15 @@ namespace TodoApp
         public SideBarMenuView()
         {
             InitializeComponent();
+        }
+
+        public delegate void OnBackClickedDelegate();
+
+        public OnBackClickedDelegate OnBackClicked { get; set; }
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            OnBackClicked?.Invoke();
         }
     }
 }

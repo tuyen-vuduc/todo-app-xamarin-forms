@@ -31,7 +31,7 @@
                         }" />
                     <ContentView.GestureRecognizers>
                         <TapGestureRecognizer
-                            Command="{Binding ToggleSidebarCommand}" />
+                            Tapped="TapGestureRecognizer_Tapped" />
                     </ContentView.GestureRecognizers>
                 </ContentView>
                 <ContentView
