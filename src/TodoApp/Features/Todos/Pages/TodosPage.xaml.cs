@@ -1,5 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace TodoApp
 {
@@ -8,28 +7,34 @@ namespace TodoApp
         public TodosPage()
         {
             InitializeComponent();
-            TodoContentView.OnMenuClicked += Menu_Clicked;
-            SideBarView.OnBackClicked += Back_Clicked;
         }
 
-        private void Menu_Clicked()
+        protected override void OnAppearing()
         {
-            var vm = BindingContext as TodosPageViewModel;
-            vm.SidebarMenuVisible = !vm.SidebarMenuVisible;
+            base.OnAppearing();
 
-            TodoContentView.TranslateTo(App.Current.MainPage.Width * 0.8, 0, 500, Easing.CubicIn);
-            TodoContentView.ScaleTo(0.85, 500, Easing.CubicIn);
-            SideBarView.TranslateTo(0, 0, 500, Easing.CubicIn);
+            TodoContentView.OnMenuClicked += Menu_ClickedEvent;
+            SideBarView.OnBackClicked += Back_ClickedEvent;
         }
 
-        private void Back_Clicked()
+        protected override void OnDisappearing()
         {
-            var vm = BindingContext as TodosPageViewModel;
-            vm.SidebarMenuVisible = !vm.SidebarMenuVisible;
+            TodoContentView.OnMenuClicked -= Menu_ClickedEvent;
+            SideBarView.OnBackClicked -= Back_ClickedEvent;
+        }
 
+        private void Back_ClickedEvent()
+        {
             TodoContentView.TranslateTo(0, 0, 500, Easing.CubicOut);
             TodoContentView.ScaleTo(1, 500, Easing.CubicOut);
             SideBarView.TranslateTo(-App.Current.MainPage.Width * 0.8, 0, 500, Easing.CubicOut);
+        }
+
+        private void Menu_ClickedEvent()
+        {
+            TodoContentView.TranslateTo(App.Current.MainPage.Width * 0.8, 0, 500, Easing.CubicIn);
+            TodoContentView.ScaleTo(0.85, 500, Easing.CubicIn);
+            SideBarView.TranslateTo(0, 0, 500, Easing.CubicIn);
         }
     }
 }
