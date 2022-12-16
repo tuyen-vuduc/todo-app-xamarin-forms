@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace TodoApp
@@ -9,6 +8,15 @@ namespace TodoApp
         public TodosMainContentView()
         {
             InitializeComponent();
+        }
+
+        public delegate void OnMenuClickedDelegate();
+
+        public OnMenuClickedDelegate OnMenuClicked { get; set; }
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            OnMenuClicked?.Invoke();
         }
     }
 }

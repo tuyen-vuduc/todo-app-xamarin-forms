@@ -159,12 +159,5 @@ namespace TodoApp
             Items.Remove(model);
             RefreshStatistics();
         }
-
-        public ICommand ToggleSidebarCommand => _ToggleSidebarCommand ??= new Command(ExecuteToggleSidebarCommand);
-        ICommand _ToggleSidebarCommand;
-        void ExecuteToggleSidebarCommand()
-        {
-            SidebarMenuVisible = !SidebarMenuVisible;
-        }
     }
 }

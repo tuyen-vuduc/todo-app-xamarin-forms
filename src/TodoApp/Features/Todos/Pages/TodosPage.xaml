@@ -11,7 +11,7 @@
     Shell.NavBarHasShadow="False"
     Shell.NavBarIsVisible="False"
     ios:Page.UseSafeArea="True"
-    BackgroundColor="{x:Static app:Colors.Bg}"
+    BackgroundColor="{x:Static app:Colors.Primary}"
     BindingContext="{app:BindingContext {x:Type app:TodosPageViewModel}}">
     <ContentPage.ToolbarItems>
         <ToolbarItem
@@ -29,7 +29,7 @@
                 Glyph={x:Static app:Mdi.Bell}
             }" />
     </ContentPage.ToolbarItems>
-    <ContentPage.Triggers>
+    <!--<ContentPage.Triggers>
         <DataTrigger
             Binding="{Binding SidebarMenuVisible}"
             Value="True"
@@ -38,16 +38,19 @@
                 Property="BackgroundColor"
                 Value="{x:Static app:Colors.Primary}" />
         </DataTrigger>
-    </ContentPage.Triggers>
+    </ContentPage.Triggers>-->
 
     <Grid
         x:Name="grid">
-        <app:SideBarMenuView />
+        <app:SideBarMenuView 
+            x:Name="SideBarView" 
+            TranslationX="-300"/>
 
         <app:TodosMainContentView
+            x:Name="TodoContentView"
             BindingContext="{Binding BindingContext, Source={x:Reference root}}"
             >
-            <app:TodosMainContentView.Triggers>
+            <!--<app:TodosMainContentView.Triggers>
                 <DataTrigger
                     Binding="{Binding SidebarMenuVisible}"
                     Value="True"
@@ -87,7 +90,7 @@
                         Property="TranslationX"
                         Value="0" />
                 </DataTrigger>
-            </app:TodosMainContentView.Triggers>
+            </app:TodosMainContentView.Triggers>-->
         </app:TodosMainContentView>
     </Grid>
 </app:BasePage>

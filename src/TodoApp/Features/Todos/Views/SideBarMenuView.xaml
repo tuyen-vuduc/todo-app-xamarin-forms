@@ -151,7 +151,7 @@
                         All={x:Static app:Dimens.SpacingSm}}">
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer
-                            Command="{Binding ToggleSidebarCommand}" />
+                            Tapped="TapGestureRecognizer_Tapped" />
                     </Frame.GestureRecognizers>
                     <Image
                         Source="{FontImage
