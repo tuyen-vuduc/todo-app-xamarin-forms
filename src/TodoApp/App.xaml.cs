@@ -1,13 +1,10 @@
-﻿using Xamarin.Forms;
-using DryIoc;
-using Acr.UserDialogs;
+﻿using DryIoc;
 
-namespace TodoApp
+namespace TodoApp;
+
+public partial class App : Application
 {
-    public partial class App
-    {
-
-        public App()
+	public App()
         {
             InitializeComponent();
 
@@ -18,7 +15,7 @@ namespace TodoApp
     
             // We need to register a IContainer instance to DependencyService
             // so we could activate an VM instance in BindingContext extension.
-            DependencyService.RegisterSingleton<IContainer>(container);
+            DependencyService.RegisterSingleton<DryIoc.IContainer>(container);
 
             MainPage = new AppShell();
         }
@@ -35,13 +32,10 @@ namespace TodoApp
         {
         }
 
-        void RegisterTypes(IContainer container)
+        void RegisterTypes(DryIoc.IContainer container)
         {
             container.Register<IAppNavigator, AppNavigator>(Reuse.Singleton);
             container.Register(typeof(IRepository<>), typeof(Repository<>), Reuse.Singleton);
             container.RegisterInstance<TodosDbContext>(new TodosDbContext());
-            container.RegisterInstance<IUserDialogs>(UserDialogs.Instance);
         }
-
-    }
 }

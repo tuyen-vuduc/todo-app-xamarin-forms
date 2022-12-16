@@ -1,14 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Application
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-    xmlns:app="clr-namespace:TodoApp;assembly=TodoApp"
-    x:Class="TodoApp.App">
-    <!--
-        Define global resources and styles here, that apply to all pages in your app.
-    -->
-    <Application.Resources>
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:app="clr-namespace:TodoApp;assembly=TodoApp"
+             x:Class="TodoApp.App">
+             <Application.Resources>
         <ResourceDictionary>
             <Style
                 TargetType="Button">
@@ -50,10 +46,11 @@
                 x:Key="TaskCountConverter" />
             <app:MenuIconConverter
                 x:Key="MenuIconConverter" />
-            <xct:InvertedBoolConverter
+            
+            <toolkit:InvertedBoolConverter
                 x:Key="InvertedBoolConverter" />
 
-            <Style
+            <!--<Style
                 x:Key="ShadowStyle"
                 TargetType="View">
                 <Setter
@@ -68,10 +65,10 @@
                 <Setter
                     Property="xct:ShadowEffect.Opacity"
                     Value="0.1" />
-            </Style>
+            </Style>-->
             <Style
                 x:Key="FrameStyle"
-                BasedOn="{x:StaticResource ShadowStyle}"
+                
                 TargetType="Frame">
                 <Setter
                     Property="HasShadow"
@@ -82,4 +79,12 @@
             </Style>
         </ResourceDictionary>
     </Application.Resources>
+    <!--<Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>-->
 </Application>

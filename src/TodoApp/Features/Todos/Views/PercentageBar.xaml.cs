@@ -1,5 +1,3 @@
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace TodoApp
 {
@@ -22,15 +20,15 @@ namespace TodoApp
 
         public static readonly BindableProperty ColorProperty = BindableProperty.Create(
             nameof(Color),
-            typeof(Color?),
+            typeof(Color),
             typeof(PercentageBar),
-            Xamarin.Forms.Color.Purple,
+            Microsoft.Maui.Graphics.Colors.Purple,
             BindingMode.OneWay
             );
 
-        public Color? Color
+        public Color Color
         {
-            get => GetValue(ColorProperty) as Color?;
+            get => GetValue(ColorProperty) as Color;
             set => SetValue(ColorProperty, value);
         }
 

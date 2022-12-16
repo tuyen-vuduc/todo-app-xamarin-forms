@@ -1,7 +1,5 @@
 ﻿using System;
 using DryIoc;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace TodoApp
 {
@@ -12,7 +10,7 @@ namespace TodoApp
 
         public object ProvideValue(IServiceProvider serviceProvider)
         {
-            var container = DependencyService.Get<IContainer>();
+            var container = DependencyService.Get<DryIoc.IContainer>();
 
             var vm = container?.Resolve(ViewModelType);
 
