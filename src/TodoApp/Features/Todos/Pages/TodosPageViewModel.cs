@@ -4,8 +4,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Acr.UserDialogs;
-using Xamarin.Forms;
 
 namespace TodoApp
 {
@@ -13,16 +11,13 @@ namespace TodoApp
     public class TodosPageViewModel : NavigationAwareBaseViewModel
     {
         private readonly TodosService _todosService;
-        private readonly IUserDialogs _userDialogs;
 
         public TodosPageViewModel(
             TodosService todosService,
-            IUserDialogs userDialogs,
             IAppNavigator appNavigator)
             : base(appNavigator)
         {
             _todosService = todosService;
-            _userDialogs = userDialogs;
 
             CurrentUser = new UserModel
             {
@@ -145,9 +140,11 @@ namespace TodoApp
 
         async void ExecuteDeleteCommand(TodoModel model)
         {
-            var confirmed = await _userDialogs.ConfirmAsync(
+            var confirmed = await Application.Current.MainPage.DisplayAlert(
+                "Warning!",
                 "Are you sure to delete this todo item?",
-                "Warning!"
+                "Yes",
+                "Cancel"
                 );
 
             if (!confirmed) return;

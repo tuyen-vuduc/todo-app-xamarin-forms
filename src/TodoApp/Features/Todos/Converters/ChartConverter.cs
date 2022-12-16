@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Microcharts;
-using SkiaSharp.Views.Forms;
-using Xamarin.Forms;
+using SkiaSharp.Views.Maui;
 
 namespace TodoApp
 {
@@ -21,7 +20,6 @@ namespace TodoApp
                         Color = Colors.Accent1.ToSKColor()
                     }),
                     BackgroundColor = SkiaSharp.SKColor.Empty,
-                    ValueLabelOption = ValueLabelOption.None,
                     LabelColor = Colors.Accent1.ToSKColor(),
                     LineAreaAlpha = 33,
                     LineMode = LineMode.Spline,

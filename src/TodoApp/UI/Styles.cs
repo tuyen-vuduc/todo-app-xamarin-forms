@@ -1,51 +1,51 @@
-using Xamarin.Forms;
+
 
 namespace TodoApp
 {
     public partial class Styles
     {
         public static readonly Style TextPrimaryLg = CreateStyle<Label>()
-            .Set(VisualElement.BackgroundColorProperty, Color.Transparent)
+            .Set(VisualElement.BackgroundColorProperty, Microsoft.Maui.Graphics.Colors.Transparent)
             .Set(Label.TextColorProperty, Colors.TextPrimary)
             .Set(Label.FontSizeProperty, Dimens.FontSizeLg);
         
         public static readonly Style TextPrimaryMd = CreateStyle<Label>()
-            .Set(VisualElement.BackgroundColorProperty, Color.Transparent)
+            .Set(VisualElement.BackgroundColorProperty, Microsoft.Maui.Graphics.Colors.Transparent)
             .Set(Label.TextColorProperty, Colors.TextPrimary)
             .Set(Label.FontSizeProperty, Dimens.FontSizeMd);
         
         public static readonly Style TextSecondaryLg = CreateStyle<Label>()
-            .Set(VisualElement.BackgroundColorProperty, Color.Transparent)
+            .Set(VisualElement.BackgroundColorProperty, Microsoft.Maui.Graphics.Colors.Transparent)
             .Set(Label.TextColorProperty, Colors.TextSecondary)
             .Set(Label.FontSizeProperty, Dimens.FontSizeLg);
 
         public static readonly Style TextSecondaryMd = CreateStyle<Label>()
-            .Set(VisualElement.BackgroundColorProperty, Color.Transparent)
+            .Set(VisualElement.BackgroundColorProperty, Microsoft.Maui.Graphics.Colors.Transparent)
             .Set(Label.TextColorProperty, Colors.TextSecondary)
             .Set(Label.FontSizeProperty, Dimens.FontSizeMd);
         
         public static readonly Style TextSecondarySm = CreateStyle<Label>()
-            .Set(VisualElement.BackgroundColorProperty, Color.Transparent)
+            .Set(VisualElement.BackgroundColorProperty, Microsoft.Maui.Graphics.Colors.Transparent)
             .Set(Label.TextColorProperty, Colors.TextSecondary)
             .Set(Label.FontSizeProperty, Dimens.FontSizeSm);
         
         public static readonly Style TextSidebarMenuItem = CreateStyle<Label>()
-            .Set(VisualElement.BackgroundColorProperty, Color.Transparent)
-            .Set(Label.TextColorProperty, Color.White)
+            .Set(VisualElement.BackgroundColorProperty, Microsoft.Maui.Graphics.Colors.Transparent)
+            .Set(Label.TextColorProperty, Microsoft.Maui.Graphics.Colors.White)
             .Set(Label.FontSizeProperty, Dimens.FontSizeMd);
         
         public static readonly Style TextSidebarPersonName = CreateStyle<Label>()
-            .Set(VisualElement.BackgroundColorProperty, Color.Transparent)
-            .Set(Label.TextColorProperty, Color.White)
+            .Set(VisualElement.BackgroundColorProperty, Microsoft.Maui.Graphics.Colors.Transparent)
+            .Set(Label.TextColorProperty, Microsoft.Maui.Graphics.Colors.White)
             .Set(Label.FontSizeProperty, Dimens.FontSizeXl);
         
         public static readonly Style TextSidebarFooter = CreateStyle<Label>()
-            .Set(VisualElement.BackgroundColorProperty, Color.Transparent)
-            .Set(Label.TextColorProperty, Color.White)
+            .Set(VisualElement.BackgroundColorProperty, Microsoft.Maui.Graphics.Colors.Transparent)
+            .Set(Label.TextColorProperty, Microsoft.Maui.Graphics.Colors.White)
             .Set(Label.FontSizeProperty, Dimens.FontSizeLg);
         
         public static readonly Style TextPageHeader = CreateStyle<Label>()
-            .Set(VisualElement.BackgroundColorProperty, Color.Transparent)
+            .Set(VisualElement.BackgroundColorProperty, Microsoft.Maui.Graphics.Colors.Transparent)
             .Set(Label.TextColorProperty, Colors.TextPrimary)
             .Set(Label.FontAttributesProperty, FontAttributes.Bold)
             .Set(Label.FontSizeProperty, Dimens.FontSizeXl);
