@@ -40,7 +40,6 @@ The app is built based on [the UI design](https://dribbble.com/shots/14100356-To
 - [Microcharts](https://github.com/microcharts-dotnet/Microcharts)
 - [MAUI Communitity Toolkits](https://learn.microsoft.com/en-us/dotnet/communitytoolkit/maui/)
 - [MVVM Communitity Toolkits](https://learn.microsoft.com/en-us/dotnet/communitytoolkit/mvvm/)
-- [Acr.UserDialogs](https://github.com/aritchie/userdialogs)
 - [EFCore SQLite](https://docs.microsoft.com/en-us/ef/core/get-started/xamarin)
 
 # Font icons

@@ -86,19 +86,35 @@ The base VMs are
 - `OnInitAwareViewModel`: Use this one if we only care about `OnInit` event
 - `NavigationAwareBaseViewModel`: Use this one if we care about both `OnBack` and `OnInit` events
 
+**4) Sequene diagram**
+
+```mermaid
+sequenceDiagram
+    User->>App: Open TodosPage
+    App->>IAppNavigator: NavigateAsync("//todos")
+    IAppNavigator->>Shell: GoToAsync
+    Shell-->>IAppNavigator: navigation result
+    IAppNavigator-->>App: navigation result
+    App-->>User: TodosPage presented
+
+```
+
 ## Dependency Injection
 
 To make components easisy to wire up togehter, but loosely coupled, we use DryIoC for dependency injection.
 
-All dependencies are declared within `App.xaml.cs` in method `RegisterTypes`.
+All dependencies are declared within `MauiProgram.cs` in method `RegisterServices`.
 
 ```
-void RegisterTypes(IContainer container)
+static MauiAppBuilder RegisterServices(this MauiAppBuilder builder)
 {
-    container.Register<IAppNavigator, AppNavigator>(Reuse.Singleton);
-    container.Register<IRepository<TodoEntity>, TodoRepository>(Reuse.Singleton);
-    container.RegisterInstance<TodosDbContext>(new TodosDbContext());
-    container.RegisterInstance<IUserDialogs>(UserDialogs.Instance);
+    builder.Services.AddSingleton<IAppNavigator, AppNavigator>();
+    builder.Services.AddSingleton<IRepository<TodoEntity>, Repository<TodoEntity>>();
+    builder.Services.AddSingleton<TodosDbContext>();
+
+    builder.Services.AddSingleton<TodosService>();
+
+    return builder;
 }
 ```
 
@@ -106,13 +122,15 @@ void RegisterTypes(IContainer container)
 
 **1) Wire up**
 
-To wire up View and ViewModel, we have `BindingContextMarkupExtension` which we could do as below
+To wire up View and ViewModel, we have the view model as the construct parameter of the view
 
 ```
-<app:BasePage
-    [...]
-    xmlns:app="clr-namespace:TodoApp"
-    BindingContext="{app:BindingContext {x:Type app:TodosPageViewModel}}">
+public NewTodoPage(NewTodoPageViewModel vm)
+{
+    InitializeComponent();
+
+    BindingContext = vm;
+}
 ```
 
 **2) Page lifecycle**
