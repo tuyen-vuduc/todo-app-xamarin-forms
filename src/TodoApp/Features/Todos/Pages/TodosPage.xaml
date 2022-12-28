@@ -27,16 +27,6 @@
                 Glyph={x:Static app:Mdi.Bell}
             }" />
     </ContentPage.ToolbarItems>
-    <!--<ContentPage.Triggers>
-        <DataTrigger
-            Binding="{Binding SidebarMenuVisible}"
-            Value="True"
-            TargetType="ContentPage">
-            <Setter
-                Property="BackgroundColor"
-                Value="{x:Static app:Colors.Primary}" />
-        </DataTrigger>
-    </ContentPage.Triggers>-->
 
     <Grid
         x:Name="grid">
@@ -45,50 +35,20 @@
             TranslationX="-300"/>
 
         <app:TodosMainContentView
+            BackgroundColor="{x:Static app:Colors.Bg}"
             x:Name="TodoContentView"
             BindingContext="{Binding BindingContext, Source={x:Reference root}}"
             >
-            <!--<app:TodosMainContentView.Triggers>
+            <app:TodosMainContentView.Triggers>
                 <DataTrigger
                     Binding="{Binding SidebarMenuVisible}"
                     Value="True"
                     TargetType="app:TodosMainContentView">
                     <Setter
                         Property="BackgroundColor"
-                        Value="Transparent" />
-                    <Setter
-                        Property="Scale"
-                        Value="0.87" />
-                    <Setter
-                        Property="TranslationX">
-                        <Setter.Value>
-                            <MultiBinding
-                                Converter="{StaticResource MultiplyConverter}">
-                                <Binding
-                                    Path="Width"
-                                    Source="{x:Reference grid}" />
-                                <Binding
-                                    Path="."
-                                    Source="0.75" />
-                            </MultiBinding>
-                        </Setter.Value>
-                    </Setter>
+                        Value="{x:Static app:Colors.Primary}" />
                 </DataTrigger>
-                <DataTrigger
-                    Binding="{Binding SidebarMenuVisible}"
-                    Value="False"
-                    TargetType="app:TodosMainContentView">
-                    <Setter
-                        Property="BackgroundColor"
-                        Value="{x:Static app:Colors.Bg}" />
-                    <Setter
-                        Property="Scale"
-                        Value="1" />
-                    <Setter
-                        Property="TranslationX"
-                        Value="0" />
-                </DataTrigger>
-            </app:TodosMainContentView.Triggers>-->
+            </app:TodosMainContentView.Triggers>
         </app:TodosMainContentView>
     </Grid>
 </app:BasePage>

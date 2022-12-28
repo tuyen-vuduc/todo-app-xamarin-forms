@@ -25,9 +25,11 @@ namespace TodoApp
 
         private void Back_ClickedEvent()
         {
-            TodoContentView.TranslateTo(0, 0, 500, Easing.CubicOut);
-            TodoContentView.ScaleTo(1, 500, Easing.CubicOut);
-            SideBarView.TranslateTo(-App.Current.MainPage.Width * 0.8, 0, 500, Easing.CubicOut);
+            Task.WhenAll(
+                TodoContentView.TranslateTo(0, 0, 500, Easing.CubicOut),
+                TodoContentView.ScaleTo(1, 500, Easing.CubicOut),
+                SideBarView.TranslateTo(-App.Current.MainPage.Width * 0.8, 0, 500, Easing.CubicOut)
+            );
         }
 
         private void Menu_ClickedEvent()

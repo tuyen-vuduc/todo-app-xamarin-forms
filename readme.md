@@ -1,6 +1,11 @@
 # Overview
 
-A small application to demo how to structure and architect a Xamarin.Forms application.
+A small application to demo how to structure and architect a MAUI application. Alternatively, you can check out [Chick and Paddy MAUI sample app](https://github.com/tuyen-vuduc/chick-and-paddy-dotnet-maui).
+
+**NOTE:** 
+
+- This project is used to build as a template for Xamarin.Forms application. You can check out [v1.0-xf](https://github.com/tuyen-vuduc/todo-app-xamarin-forms/releases/tag/v1.0-xf) if you still look for a Xamarin.Forms app template. 
+- Thanks a lot to [David Ortinau](https://github.com/davidortinau) to migrate the project to [MAUI and .NET7](https://learn.microsoft.com/en-us/dotnet/maui/what-is-maui).
 
 # UI Design
 The app is built based on [the UI design](https://dribbble.com/shots/14100356-ToDo-App-UI) by [Alex Arutuynov](https://dribbble.com/alex_arutuynov)
@@ -31,8 +36,7 @@ The app is built based on [the UI design](https://dribbble.com/shots/14100356-To
   />
 
 # Open Source libraries
-- [Microcharts](https://github.com/microcharts-dotnet/Microcharts)
-- [Xamarin Communitity Toolkits - Shadow](https://github.com/xamarin/XamarinCommunityToolkit)
+- [MAUI Communitity Toolkits - Shadow](https://learn.microsoft.com/en-us/dotnet/communitytoolkit/maui/)
 - [PropertyChanged - Fody](https://github.com/Fody/PropertyChanged)
 - [Acr.UserDialogs](https://github.com/aritchie/userdialogs)
 - [EFCore SQLite](https://docs.microsoft.com/en-us/ef/core/get-started/xamarin)
@@ -43,6 +47,10 @@ The app is built based on [the UI design](https://dribbble.com/shots/14100356-To
 
 # Documents
 There are few docs written to understand the project easier. Please check them out in [docs](./docs) folder.
+
+# Known issues
+
+- Unit Tests project doesn't work yet
 
 # Contributors
 

@@ -5,7 +5,7 @@
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
-		<OutputType>Exe</OutputType>
+		<OutputType Condition="'$(TargetFramework)' != 'net7.0'">Exe</OutputType>
 		<RootNamespace>TodoApp</RootNamespace>
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
@@ -15,7 +15,7 @@
 		<ApplicationTitle>TodoApp</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.todoapp</ApplicationId>
+		<ApplicationId>com.tuyenvuduc.todoapp</ApplicationId>
 		<ApplicationIdGuid>f8fe22c7-d0fe-41b3-acde-fff0934c7c10</ApplicationIdGuid>
 
 		<!-- Versions -->
