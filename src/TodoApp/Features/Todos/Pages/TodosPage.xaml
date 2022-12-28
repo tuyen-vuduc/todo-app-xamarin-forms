@@ -9,8 +9,7 @@
     Title="Todos"
     Shell.NavBarHasShadow="False"
     Shell.NavBarIsVisible="False"
-    BackgroundColor="{x:Static app:Colors.Bg}"
-    BindingContext="{app:BindingContext {x:Type app:TodosPageViewModel}}">
+    BackgroundColor="{x:Static app:Colors.Bg}">
     <ContentPage.ToolbarItems>
         <ToolbarItem
             IconImageSource="{FontImage

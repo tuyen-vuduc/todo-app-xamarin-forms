@@ -7,8 +7,7 @@
     x:DataType="app:NewTodoPageViewModel"
     Shell.PresentationMode="ModalAnimated"
     Title="New Todo"
-    BackgroundColor="{x:Static app:Colors.Bg}"
-    BindingContext="{app:BindingContext {x:Type app:NewTodoPageViewModel}}">
+    BackgroundColor="{x:Static app:Colors.Bg}">
     <Grid
         RowDefinitions="80,*"
         ColumnDefinitions="*,80">

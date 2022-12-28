@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Maui;
+﻿using System.ComponentModel;
+using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Platform;
 using SkiaSharp.Views.Maui.Controls.Hosting;
@@ -19,7 +20,9 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 fonts.AddFont("materialdesignicons-webfont.ttf", TodoApp.Fonts.Mdi);
-			});
+			})
+            .RegisterServices()
+            .RegisterPages();
 
 #if DEBUG
 		builder.Logging.AddDebug();
@@ -42,5 +45,33 @@ public static class MauiProgram
             handler.PlatformView.FontWeight = Microsoft.UI.Text.FontWeights.Thin;
 #endif
         });
+    }
+
+    static MauiAppBuilder RegisterServices(this MauiAppBuilder builder)
+    {
+        builder.Services.AddSingleton<IAppNavigator, AppNavigator>();
+        // TODO allows to add generic service as a single line
+        builder.Services.AddSingleton<IRepository<TodoEntity>, Repository<TodoEntity>>();
+        builder.Services.AddSingleton<TodosDbContext>();
+
+        builder.Services.AddSingleton<TodosService>();
+
+        return builder;
+    }
+
+    static MauiAppBuilder RegisterPages(this MauiAppBuilder builder)
+    {
+        builder.Services.AddPage<TodosPage, TodosPageViewModel>();
+        builder.Services.AddPage<NewTodoPage, NewTodoPageViewModel>();
+
+        return builder;
+    }
+
+    static IServiceCollection AddPage<TPage, TViewModel>(this IServiceCollection services)
+        where TPage : BasePage where TViewModel : BaseViewModel
+    {
+        services.AddTransient<TPage>();
+        services.AddTransient<TViewModel>();
+        return services;
     }
 }
