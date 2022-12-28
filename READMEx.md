@@ -4,7 +4,7 @@ A small application to demo how to structure and architect a MAUI application. A
 
 **NOTE:** 
 
-- This project is used to build as a template for Xamarin.Forms application. You can check out [v1.0-xf](https://github.com/tuyen-vuduc/todo-app-xamarin-forms/releases/tag/v1.0-xf) if you still look for a Xamarin.Forms app template. 
+- This project used to be a template for Xamarin.Forms applications. You can check out [v1.0-xf](https://github.com/tuyen-vuduc/todo-app-xamarin-forms/releases/tag/v1.0-xf) if you still look for a Xamarin.Forms app template. 
 - Thanks a lot to [David Ortinau](https://github.com/davidortinau) to migrate the project to [MAUI and .NET7](https://learn.microsoft.com/en-us/dotnet/maui/what-is-maui).
 
 # UI Design
