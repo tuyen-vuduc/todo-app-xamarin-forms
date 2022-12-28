@@ -1,21 +1,18 @@
-﻿using System;
+﻿namespace TodoApp;
 
-namespace TodoApp
+public partial class SideBarMenuView
 {
-    public partial class SideBarMenuView
+    public SideBarMenuView()
     {
-        public SideBarMenuView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
 
-        public delegate void OnBackClickedDelegate();
+    public delegate void OnBackClickedDelegate();
 
-        public OnBackClickedDelegate OnBackClicked { get; set; }
+    public OnBackClickedDelegate OnBackClicked { get; set; }
 
-        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
-            OnBackClicked?.Invoke();
-        }
+    private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+    {
+        OnBackClicked?.Invoke();
     }
 }

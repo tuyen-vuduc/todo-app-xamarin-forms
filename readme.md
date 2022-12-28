@@ -36,6 +36,8 @@ The app is built based on [the UI design](https://dribbble.com/shots/14100356-To
   />
 
 # Open Source libraries
+
+- [Microcharts](https://github.com/microcharts-dotnet/Microcharts)
 - [MAUI Communitity Toolkits - Shadow](https://learn.microsoft.com/en-us/dotnet/communitytoolkit/maui/)
 - [PropertyChanged - Fody](https://github.com/Fody/PropertyChanged)
 - [Acr.UserDialogs](https://github.com/aritchie/userdialogs)

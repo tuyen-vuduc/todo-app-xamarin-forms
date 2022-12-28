@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace TodoApp;
 
-
-namespace TodoApp
+public partial class TodosMainContentView : ContentView
 {
-    public partial class TodosMainContentView : ContentView
+    public TodosMainContentView()
     {
-        public TodosMainContentView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
 
-        public delegate void OnMenuClickedDelegate();
+    public delegate void OnMenuClickedDelegate();
 
-        public OnMenuClickedDelegate OnMenuClicked { get; set; }
+    public OnMenuClickedDelegate OnMenuClicked { get; set; }
 
-        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
-            OnMenuClicked?.Invoke();
-        }
+    private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+    {
+        OnMenuClicked?.Invoke();
     }
 }

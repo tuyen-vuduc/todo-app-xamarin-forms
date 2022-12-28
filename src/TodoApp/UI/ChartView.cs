@@ -1,64 +1,57 @@
-using System;
-using Microcharts;
-using SkiaSharp;
-using SkiaSharp.Views.Maui;
-using SkiaSharp.Views.Maui.Controls;
+namespace TodoApp.Views;
 
-namespace TodoApp.Views
+internal class ChartView : SKCanvasView
 {
-    internal class ChartView : SKCanvasView
+    public event EventHandler<SKPaintSurfaceEventArgs> ChartPainted;
+
+    public static readonly BindableProperty ChartProperty = BindableProperty.Create(nameof(Chart), typeof(Chart), typeof(ChartView), null, propertyChanged: OnChartChanged);
+    
+    public Chart Chart
     {
-        public event EventHandler<SKPaintSurfaceEventArgs> ChartPainted;
+        get { return (Chart)GetValue(ChartProperty); }
+        set { SetValue(ChartProperty, value); }
+    }
 
-        public static readonly BindableProperty ChartProperty = BindableProperty.Create(nameof(Chart), typeof(Chart), typeof(ChartView), null, propertyChanged: OnChartChanged);
-        
-        public Chart Chart
+    private InvalidatedWeakEventHandler<ChartView> handler;
+
+    private Chart _chart;
+
+    public ChartView()
+    {
+        BackgroundColor = Microsoft.Maui.Graphics.Colors.Transparent;
+        PaintSurface += OnPaintCanvas;
+    }
+
+    private static void OnChartChanged(BindableObject d, object oldValue, object value)
+    {
+        var view = d as ChartView;
+
+        if (view._chart != null)
         {
-            get { return (Chart)GetValue(ChartProperty); }
-            set { SetValue(ChartProperty, value); }
+            view.handler.Dispose();
+            view.handler = null;
         }
 
-        private InvalidatedWeakEventHandler<ChartView> handler;
+        view._chart = value as Chart;
+        view.InvalidateSurface();
 
-        private Chart _chart;
-
-        public ChartView()
+        if (view._chart != null)
         {
-            BackgroundColor = Microsoft.Maui.Graphics.Colors.Transparent;
-            PaintSurface += OnPaintCanvas;
+            view.handler = view._chart.ObserveInvalidate(view, (v) => v.InvalidateSurface());
+        }
+    }
+
+    private void OnPaintCanvas(object sender, SKPaintSurfaceEventArgs e)
+    {
+        if (_chart != null)
+        {
+            _chart.Draw(e.Surface.Canvas, e.Info.Width, e.Info.Height);
+        }
+        else
+        {
+            e.Surface.Canvas.Clear(SKColors.Transparent);
         }
 
-        private static void OnChartChanged(BindableObject d, object oldValue, object value)
-        {
-            var view = d as ChartView;
-
-            if (view._chart != null)
-            {
-                view.handler.Dispose();
-                view.handler = null;
-            }
-
-            view._chart = value as Chart;
-            view.InvalidateSurface();
-
-            if (view._chart != null)
-            {
-                view.handler = view._chart.ObserveInvalidate(view, (v) => v.InvalidateSurface());
-            }
-        }
-
-        private void OnPaintCanvas(object sender, SKPaintSurfaceEventArgs e)
-        {
-            if (_chart != null)
-            {
-                _chart.Draw(e.Surface.Canvas, e.Info.Width, e.Info.Height);
-            }
-            else
-            {
-                e.Surface.Canvas.Clear(SKColors.Transparent);
-            }
-
-            ChartPainted?.Invoke(sender, e);
-        }
+        ChartPainted?.Invoke(sender, e);
     }
 }

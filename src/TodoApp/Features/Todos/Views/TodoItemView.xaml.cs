@@ -1,7 +1,4 @@
-﻿using System.Windows.Input;
-
-
-namespace TodoApp
+﻿namespace TodoApp
 {
     public partial class TodoItemView
     {
