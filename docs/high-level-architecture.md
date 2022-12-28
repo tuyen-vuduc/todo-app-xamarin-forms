@@ -9,13 +9,6 @@ Each feature is a small MVVM group with M-V-VM and other supporting classes.
 
 <image src="./images/high-level-components.png" />
 
-## Page Sequence Diagram
-
-This is how a page lives in the app. The details are explained later in this document.
-
-<image src="./images/page-lifecycles.png" />
-
-
 ## Folder structure
 ```
 --docs
