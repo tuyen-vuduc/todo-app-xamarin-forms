@@ -1,28 +1,24 @@
-﻿using System;
-using Xamarin.Forms;
+﻿namespace TodoApp;
 
-namespace TodoApp
+public class BasePage : ContentPage
 {
-    public class BasePage : ContentPage
+    protected override void OnAppearing()
     {
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
+        base.OnAppearing();
 
-            if (BindingContext is BaseViewModel vm)
-            {
-                vm.OnAppearingAsync();
-            }
+        if (BindingContext is BaseViewModel vm)
+        {
+            vm.OnAppearingAsync();
         }
+    }
 
-        protected override void OnDisappearing()
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+
+        if (BindingContext is BaseViewModel vm)
         {
-            base.OnDisappearing();
-
-            if (BindingContext is BaseViewModel vm)
-            {
-                vm.OnDisappearingAsync();
-            }
+            vm.OnDisappearingAsync();
         }
     }
 }

@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.31911.260
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoApp.Android", "src\TodoApp.Android\TodoApp.Android.csproj", "{CE4F4B63-9FAA-4745-B828-7EFEEEFCF85B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoApp", "src\TodoApp\TodoApp.csproj", "{308E7EB3-6652-4057-B184-40C87A2D3FCC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AEF56DEB-DE6C-4AC8-819C-A1CE9A55258E}"
@@ -19,8 +17,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		readme.md = readme.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoApp.iOS", "src\TodoApp.iOS\TodoApp.iOS.csproj", "{2FFEE97E-98A8-4557-8F9E-82C5C63B9677}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,19 +27,6 @@ Global
 		Release|iPhoneSimulator = Release|iPhoneSimulator
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CE4F4B63-9FAA-4745-B828-7EFEEEFCF85B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CE4F4B63-9FAA-4745-B828-7EFEEEFCF85B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CE4F4B63-9FAA-4745-B828-7EFEEEFCF85B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{CE4F4B63-9FAA-4745-B828-7EFEEEFCF85B}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{CE4F4B63-9FAA-4745-B828-7EFEEEFCF85B}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{CE4F4B63-9FAA-4745-B828-7EFEEEFCF85B}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{CE4F4B63-9FAA-4745-B828-7EFEEEFCF85B}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{CE4F4B63-9FAA-4745-B828-7EFEEEFCF85B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CE4F4B63-9FAA-4745-B828-7EFEEEFCF85B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CE4F4B63-9FAA-4745-B828-7EFEEEFCF85B}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{CE4F4B63-9FAA-4745-B828-7EFEEEFCF85B}.Release|iPhone.Build.0 = Release|Any CPU
-		{CE4F4B63-9FAA-4745-B828-7EFEEEFCF85B}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{CE4F4B63-9FAA-4745-B828-7EFEEEFCF85B}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{308E7EB3-6652-4057-B184-40C87A2D3FCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{308E7EB3-6652-4057-B184-40C87A2D3FCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{308E7EB3-6652-4057-B184-40C87A2D3FCC}.Debug|iPhone.ActiveCfg = Debug|Any CPU
@@ -68,18 +51,6 @@ Global
 		{E360FE78-D7B3-40DC-B2C1-807F1EE16DF2}.Release|iPhone.Build.0 = Release|Any CPU
 		{E360FE78-D7B3-40DC-B2C1-807F1EE16DF2}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{E360FE78-D7B3-40DC-B2C1-807F1EE16DF2}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{2FFEE97E-98A8-4557-8F9E-82C5C63B9677}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
-		{2FFEE97E-98A8-4557-8F9E-82C5C63B9677}.Debug|Any CPU.Build.0 = Debug|iPhoneSimulator
-		{2FFEE97E-98A8-4557-8F9E-82C5C63B9677}.Debug|iPhone.ActiveCfg = Debug|iPhone
-		{2FFEE97E-98A8-4557-8F9E-82C5C63B9677}.Debug|iPhone.Build.0 = Debug|iPhone
-		{2FFEE97E-98A8-4557-8F9E-82C5C63B9677}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
-		{2FFEE97E-98A8-4557-8F9E-82C5C63B9677}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
-		{2FFEE97E-98A8-4557-8F9E-82C5C63B9677}.Release|Any CPU.ActiveCfg = Release|iPhoneSimulator
-		{2FFEE97E-98A8-4557-8F9E-82C5C63B9677}.Release|Any CPU.Build.0 = Release|iPhoneSimulator
-		{2FFEE97E-98A8-4557-8F9E-82C5C63B9677}.Release|iPhone.ActiveCfg = Release|iPhone
-		{2FFEE97E-98A8-4557-8F9E-82C5C63B9677}.Release|iPhone.Build.0 = Release|iPhone
-		{2FFEE97E-98A8-4557-8F9E-82C5C63B9677}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
-		{2FFEE97E-98A8-4557-8F9E-82C5C63B9677}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,7 +59,6 @@ Global
 		{CE4F4B63-9FAA-4745-B828-7EFEEEFCF85B} = {AEF56DEB-DE6C-4AC8-819C-A1CE9A55258E}
 		{308E7EB3-6652-4057-B184-40C87A2D3FCC} = {AEF56DEB-DE6C-4AC8-819C-A1CE9A55258E}
 		{E360FE78-D7B3-40DC-B2C1-807F1EE16DF2} = {4C9B0593-90B3-420F-B4AA-055949D3B65C}
-		{2FFEE97E-98A8-4557-8F9E-82C5C63B9677} = {AEF56DEB-DE6C-4AC8-819C-A1CE9A55258E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5F373946-9F27-4C95-89B4-74FFBF0438DE}

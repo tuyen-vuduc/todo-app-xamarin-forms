@@ -1,9 +1,6 @@
-﻿using Xamarin.Forms;
+﻿namespace TodoApp;
 
-namespace TodoApp
+public class Fonts
 {
-    public class Fonts
-    {
-        public const string Mdi = nameof(Mdi);
-    }
+    public const string Mdi = nameof(Mdi);
 }

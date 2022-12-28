@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Xamarin.Forms;
+
 
 namespace TodoApp
 {
-    public abstract class NavigationAwareBaseViewModel : BaseViewModel, IQueryAttributable
+    public abstract class NavigationAwareBaseViewModel : BaseViewModel //, IQueryAttributable
     {
         protected NavigationAwareBaseViewModel(IAppNavigator appNavigator) : base(appNavigator)
         {

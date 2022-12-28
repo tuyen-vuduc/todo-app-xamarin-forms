@@ -1,163 +1,158 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Acr.UserDialogs;
-using Xamarin.Forms;
+﻿namespace TodoApp;
 
-namespace TodoApp
+// ReSharper disable once ClassNeverInstantiated.Global
+public partial class TodosPageViewModel : NavigationAwareBaseViewModel
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
-    public class TodosPageViewModel : NavigationAwareBaseViewModel
+    private readonly TodosService _todosService;
+
+    public TodosPageViewModel(
+        TodosService todosService,
+        IAppNavigator appNavigator)
+        : base(appNavigator)
     {
-        private readonly TodosService _todosService;
-        private readonly IUserDialogs _userDialogs;
+        _todosService = todosService;
 
-        public TodosPageViewModel(
-            TodosService todosService,
-            IUserDialogs userDialogs,
-            IAppNavigator appNavigator)
-            : base(appNavigator)
+        CurrentUser = new UserModel
         {
-            _todosService = todosService;
-            _userDialogs = userDialogs;
+            FirstName = "Andrew",
+            LastName = "Wu",
+        };
 
-            CurrentUser = new UserModel
+        MenuItems = GetMenuItems();
+    }
+
+    [ObservableProperty]
+    UserModel currentUser;
+
+    [ObservableProperty]
+    ObservableCollection<MenuItemModel> menuItems;
+
+    [ObservableProperty]
+    ObservableCollection<TodoModel> items;
+
+    [ObservableProperty]
+    ObservableCollection<TaskStatisticModel> taskStatistics;
+
+    [ObservableProperty]
+    ObservableCollection<int> taskCountByDays;
+
+    [ObservableProperty]
+    bool sidebarMenuVisible;
+
+    public override async Task OnAppearingAsync()
+    {
+        await base.OnAppearingAsync();
+
+        if (TaskStatistics == null)
+        {
+            categories = await _todosService.GetCategoriesAsync();
+
+            var taskStatistics = categories.Select(x => new TaskStatisticModel
             {
-                FirstName = "Andrew",
-                LastName = "Wu",
-            };
-
-            MenuItems = GetMenuItems();
-        }
-
-        public UserModel CurrentUser { get; set; }
-
-        public ObservableCollection<MenuItemModel> MenuItems { get; set; }
-
-        public ObservableCollection<TodoModel> Items { get; set; }
-
-        public ObservableCollection<TaskStatisticModel> TaskStatistics { get; set; }
-
-        public ObservableCollection<int> TaskCountByDays { get; set; }
-
-        public bool SidebarMenuVisible { get; set; }
-
-        public override async Task OnAppearingAsync()
-        {
-            await base.OnAppearingAsync();
-
-            if (TaskStatistics == null)
-            {
-                categories = await _todosService.GetCategoriesAsync();
-
-                var taskStatistics = categories.Select(x => new TaskStatisticModel
-                {
-                    Category = x,
-                    DoneTaskCount = 0,
-                    TotalTaskCount = 0,
-                });
-                TaskStatistics = new ObservableCollection<TaskStatisticModel>(taskStatistics);
-            }
-
-            var items = await _todosService.GetTodayTasksAsync();
-
-            Items = new ObservableCollection<TodoModel>(items);
-
-            RefreshStatistics();
-            await RefreshChart();
-        }
-
-        private async Task RefreshChart()
-        {
-            var items = await _todosService.GetTaskCountsByDay();
-
-            TaskCountByDays = new ObservableCollection<int>(items);
-        }
-
-        private void RefreshStatistics()
-        {
-            var tempItems = categories.Select(x => new TodoModel
-            {
-                Category = x
+                Category = x,
+                DoneTaskCount = 0,
+                TotalTaskCount = 0,
             });
-            var groupedByCategory = Items.Union(tempItems).GroupBy(x => x.Category)
-                .Select(x => new TaskStatisticModel
-                {
-                    Category = x.Key,
-                    DoneTaskCount = x.Count(y => y.IsDone && y.Id != Guid.Empty),
-                    TotalTaskCount = x.Count(y => y.Id != Guid.Empty)
-                });
-
-            TaskStatistics = new ObservableCollection<TaskStatisticModel>(groupedByCategory);
+            TaskStatistics = new ObservableCollection<TaskStatisticModel>(taskStatistics);
         }
 
-        private static ObservableCollection<MenuItemModel> GetMenuItems()
+        var items = await _todosService.GetTodayTasksAsync();
+
+        Items = new ObservableCollection<TodoModel>(items);
+
+        RefreshStatistics();
+        await RefreshChart();
+    }
+
+    private async Task RefreshChart()
+    {
+        var items = await _todosService.GetTaskCountsByDay();
+
+        TaskCountByDays = new ObservableCollection<int>(items);
+    }
+
+    private void RefreshStatistics()
+    {
+        var tempItems = categories.Select(x => new TodoModel
         {
-            return new ObservableCollection<MenuItemModel>(new[] {
-                new MenuItemModel
-                {
-                    Icon = Mdi.Bookmark,
-                    Text = "Templates",
-                },
-                new MenuItemModel
-                {
-                    Icon = Mdi.FolderMultiple,
-                    Text = "Categories",
-                },
-                new MenuItemModel
-                {
-                    Icon = Mdi.ChartArc,
-                    Text = "Analytics",
-                },
-                new MenuItemModel
-                {
-                    Icon = Mdi.Cog,
-                    Text = "Settings",
-                },
+            Category = x
+        });
+        var groupedByCategory = Items.Union(tempItems).GroupBy(x => x.Category)
+            .Select(x => new TaskStatisticModel
+            {
+                Category = x.Key,
+                DoneTaskCount = x.Count(y => y.IsDone && y.Id != Guid.Empty),
+                TotalTaskCount = x.Count(y => y.Id != Guid.Empty)
             });
-        }
 
-        public ICommand CreateCommand => _CreateCommand ??= new Command(ExecuteCreateCommand);
-        ICommand _CreateCommand;
-        void ExecuteCreateCommand()
-        {
-            AppNavigator.NavigateAsync("new-todo");
-        }
+        TaskStatistics = new ObservableCollection<TaskStatisticModel>(groupedByCategory);
+    }
 
-        public ICommand ToggleDoneCommand => _ToggleDoneCommand ??= new Command<TodoModel>(ExecuteToggleDoneCommand);
-        ICommand _ToggleDoneCommand;
-        async void ExecuteToggleDoneCommand(TodoModel model)
-        {
-            var marked = await _todosService.ToggleDoneAsync(model);
+    private static ObservableCollection<MenuItemModel> GetMenuItems()
+    {
+        return new ObservableCollection<MenuItemModel>(new[] {
+            new MenuItemModel
+            {
+                Icon = Mdi.Bookmark,
+                Text = "Templates",
+            },
+            new MenuItemModel
+            {
+                Icon = Mdi.FolderMultiple,
+                Text = "Categories",
+            },
+            new MenuItemModel
+            {
+                Icon = Mdi.ChartArc,
+                Text = "Analytics",
+            },
+            new MenuItemModel
+            {
+                Icon = Mdi.Cog,
+                Text = "Settings",
+            },
+        });
+    }
 
-            if (!marked) return;
+    public ICommand CreateCommand => _CreateCommand ??= new Command(ExecuteCreateCommand);
+    ICommand _CreateCommand;
+    void ExecuteCreateCommand()
+    {
+        AppNavigator.NavigateAsync("new-todo");
+    }
 
-            model.IsDone = !model.IsDone;
-            RefreshStatistics();
-        }
+    public ICommand ToggleDoneCommand => _ToggleDoneCommand ??= new Command<TodoModel>(ExecuteToggleDoneCommand);
+    ICommand _ToggleDoneCommand;
+    async void ExecuteToggleDoneCommand(TodoModel model)
+    {
+        var marked = await _todosService.ToggleDoneAsync(model);
 
-        public ICommand DeleteCommand => _DeleteCommand ??= new Command<TodoModel>(ExecuteDeleteCommand);
-        ICommand _DeleteCommand;
-        private IEnumerable<string> categories;
+        if (!marked) return;
 
-        async void ExecuteDeleteCommand(TodoModel model)
-        {
-            var confirmed = await _userDialogs.ConfirmAsync(
-                "Are you sure to delete this todo item?",
-                "Warning!"
-                );
+        model.IsDone = !model.IsDone;
+        RefreshStatistics();
+    }
 
-            if (!confirmed) return;
+    public ICommand DeleteCommand => _DeleteCommand ??= new Command<TodoModel>(ExecuteDeleteCommand);
+    ICommand _DeleteCommand;
+    private IEnumerable<string> categories;
 
-            var deleted = await _todosService.DeleteAsync(model);
+    async void ExecuteDeleteCommand(TodoModel model)
+    {
+        var confirmed = await Application.Current.MainPage.DisplayAlert(
+            "Warning!",
+            "Are you sure to delete this todo item?",
+            "Yes",
+            "Cancel"
+            );
 
-            if (!deleted) return;
+        if (!confirmed) return;
 
-            Items.Remove(model);
-            RefreshStatistics();
-        }
+        var deleted = await _todosService.DeleteAsync(model);
+
+        if (!deleted) return;
+
+        Items.Remove(model);
+        RefreshStatistics();
     }
 }

@@ -1,32 +1,28 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿namespace TodoApp;
 
-namespace TodoApp
+public abstract class BaseViewModel : ObservableRecipient
 {
-    public abstract class BaseViewModel : BaseModel
+    protected IAppNavigator AppNavigator { get; }
+
+    protected BaseViewModel(IAppNavigator appNavigator)
     {
-        protected IAppNavigator AppNavigator { get; }
+        AppNavigator = appNavigator;
+    }
 
-        protected BaseViewModel(IAppNavigator appNavigator)
-        {
-            AppNavigator = appNavigator;
-        }
+    public virtual Task OnAppearingAsync()
+    {
+        System.Diagnostics.Debug.WriteLine($"{GetType().Name}.{nameof(OnAppearingAsync)}");
 
-        public virtual Task OnAppearingAsync()
-        {
-            System.Diagnostics.Debug.WriteLine($"{GetType().Name}.{nameof(OnAppearingAsync)}");
+        return Task.CompletedTask;
+    }
 
-            return Task.CompletedTask;
-        }
+    // ReSharper disable once UnusedParameter.Global
+    // ReSharper disable once UnusedMethodReturnValue.Global
+    // ReSharper disable once VirtualMemberNeverOverridden.Global
+    public virtual Task OnDisappearingAsync()
+    {
+        System.Diagnostics.Debug.WriteLine($"{GetType().Name}.{nameof(OnDisappearingAsync)}");
 
-        // ReSharper disable once UnusedParameter.Global
-        // ReSharper disable once UnusedMethodReturnValue.Global
-        // ReSharper disable once VirtualMemberNeverOverridden.Global
-        public virtual Task OnDisappearingAsync()
-        {
-            System.Diagnostics.Debug.WriteLine($"{GetType().Name}.{nameof(OnDisappearingAsync)}");
-
-            return Task.CompletedTask;
-        }
+        return Task.CompletedTask;
     }
 }

@@ -1,7 +1,4 @@
-﻿using System.Windows.Input;
-using Xamarin.Forms;
-
-namespace TodoApp
+﻿namespace TodoApp
 {
     public partial class TodoItemView
     {

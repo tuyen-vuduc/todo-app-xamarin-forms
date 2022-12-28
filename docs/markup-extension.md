@@ -5,7 +5,7 @@
 A markup extension allows us to easy and meaningfully define a margin, a padding in XAML.
 
 E.g.
-```
+```xml
 // All edge spacings are the same
 <View 
   Margin="{app:EdgetInsets 
@@ -34,7 +34,7 @@ E.g.
 A markup extension allows us to wire up view model for a view in which view model will be constructed using DI from DryIoC.
 
 E.g.
-```
+```xml
 <app:BasePage
     [...]
     xmlns:app="clr-namespace:TodoApp"

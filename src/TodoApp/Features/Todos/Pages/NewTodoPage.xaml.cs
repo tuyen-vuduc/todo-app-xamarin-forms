@@ -1,22 +1,21 @@
-﻿using System;
+﻿namespace TodoApp;
 
-namespace TodoApp
+public partial class NewTodoPage
 {
-    public partial class NewTodoPage
+    public NewTodoPage(NewTodoPageViewModel vm)
     {
-        public NewTodoPage()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
 
-        private void OnPickDueDateButtonTapped(object sender, EventArgs e)
-        {
-            DueDatePicker.Focus();
-        }
+        BindingContext = vm;
+    }
 
-        private void OnSelectCategoryButtonTapped(object sender, EventArgs e)
-        {
-            CategoryPicker.Focus();
-        }
+    private void OnPickDueDateButtonTapped(object sender, EventArgs e)
+    {
+        DueDatePicker.Focus();
+    }
+
+    private void OnSelectCategoryButtonTapped(object sender, EventArgs e)
+    {
+        CategoryPicker.Focus();
     }
 }
